@@ -74,7 +74,7 @@ export default function App() {
         <section className="bg-brand-gold py-24 text-center overflow-hidden relative">
           <div className="absolute inset-0 z-0 opacity-20 grayscale mix-blend-multiply flex items-center justify-center">
              <img 
-               src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?q=80&w=2000&auto=format&fit=crop" 
+               src="images/img (3).png" 
                alt="Corporate Style" 
                className="w-full h-full object-cover" 
                referrerPolicy="no-referrer"

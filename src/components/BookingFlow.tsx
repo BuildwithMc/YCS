@@ -5,6 +5,8 @@ import { SERVICES } from '../constants';
 import { formatCurrency, cn } from '../lib/utils';
 import toast from 'react-hot-toast';
 
+import { usePaystackPayment } from 'react-paystack';
+
 interface BookingFlowProps {
   selectedIds: string[];
   onClose: () => void;
@@ -37,16 +39,47 @@ export default function BookingFlow({ selectedIds, onClose, onSuccess }: Booking
     else if (step === 'payment') setStep('schedule');
   };
 
+  const config = {
+    reference: (new Date()).getTime().toString(),
+    email: formData.email,
+    amount: total * 100, // Amount is in the country's lowest currency. e.g Kobo, so multiply by 100
+    publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || '',
+  };
+
+  const initializePayment = usePaystackPayment(config);
+
   const handlePay = () => {
-    const loadingToast = toast.loading('Initializing Secure Payment...');
-    
-    // Simulate payment process
-    setTimeout(() => {
-      toast.dismiss(loadingToast);
-      toast.success('Payment Verified Securely');
-      setStep('success');
-      onSuccess();
-    }, 2000);
+    initializePayment({
+      onSuccess: async (reference) => {
+        const loadingToast = toast.loading('Verifying and saving booking...');
+        try {
+          const response = await fetch('http://localhost:5000/api/order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              orderDetails: { ...formData, total },
+              reference,
+            }),
+          });
+          
+          toast.dismiss(loadingToast);
+          
+          if (response.ok) {
+            toast.success('Payment Verified Securely & Order Placed!');
+            setStep('success');
+            onSuccess();
+          } else {
+            toast.error('Payment succeeded but saving failed. Contact support.');
+          }
+        } catch (error) {
+          toast.dismiss(loadingToast);
+          toast.error('Network Error while saving order details');
+        }
+      },
+      onClose: () => {
+        toast.error('Payment checkout closed');
+      }
+    });
   };
 
   return (
