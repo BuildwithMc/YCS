@@ -74,7 +74,7 @@ app.post('/api/order', async (req, res) => {
       // Email to CEO
       await transporter.sendMail({
         from: process.env.GMAIL_EMAIL,
-        to: process.env.GMAIL_EMAIL, // sending to self (CEO)
+        to: process.env.CEO_EMAIL, // sending to CEO
         subject: `New Styling Booking from ${orderDetails.name}`,
         html: emailHtml,
       });
