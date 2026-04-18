@@ -53,7 +53,7 @@ export default function Hero() {
         >
           <div className="aspect-[4/5] bg-brand-navy overflow-hidden shadow-2xl skew-y-2 relative">
              <img 
-               src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop" 
+               src="images/img4.png" 
                alt="Personal Stylist victory"
                className="w-full h-full object-cover -skew-y-2 scale-110"
                referrerPolicy="no-referrer"

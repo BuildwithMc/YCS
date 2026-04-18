@@ -14,7 +14,7 @@ export default function AboutStory() {
             className="aspect-[3/4] overflow-hidden shadow-2xl relative z-10 p-4 border border-white/10"
           >
             <img 
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop" 
+              src="images/img3.png" 
               alt="Victory Ezeji Portrait"
               className="w-full h-full object-cover transition-all duration-700 shadow-inner"
               referrerPolicy="no-referrer"
