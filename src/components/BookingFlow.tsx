@@ -57,7 +57,11 @@ export default function BookingFlow({ selectedIds, onClose, onSuccess }: Booking
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              orderDetails: { ...formData, total },
+              orderDetails: { 
+                ...formData, 
+                total,
+                services: selectedServices.map(s => s.title)
+              },
               reference,
             }),
           });

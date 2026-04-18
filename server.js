@@ -39,7 +39,7 @@ app.post('/api/order', async (req, res) => {
     if (process.env.GOOGLE_SHEET_ID && process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL) {
       await sheets.spreadsheets.values.append({
         spreadsheetId: process.env.GOOGLE_SHEET_ID,
-        range: 'Sheet1!A:F', // Adjust if necessary
+        range: 'Sheet1!A:H', // Adjusted for services and total
         valueInputOption: 'USER_ENTERED',
         requestBody: {
           values: [
@@ -50,6 +50,7 @@ app.post('/api/order', async (req, res) => {
               orderDetails.phone,
               orderDetails.sessionType,
               `${orderDetails.date} ${orderDetails.time}`,
+              orderDetails.services ? orderDetails.services.join(', ') : 'N/A',
               orderDetails.total,
             ],
           ],
@@ -67,6 +68,7 @@ app.post('/api/order', async (req, res) => {
           <li><strong>Phone:</strong> ${orderDetails.phone}</li>
           <li><strong>Session Type:</strong> ${orderDetails.sessionType}</li>
           <li><strong>Date & Time:</strong> ${orderDetails.date} at ${orderDetails.time}</li>
+          <li><strong>Services Booked:</strong> ${orderDetails.services ? orderDetails.services.join(', ') : 'N/A'}</li>
           <li><strong>Total:</strong> NGN ${orderDetails.total}</li>
         </ul>
       `;
