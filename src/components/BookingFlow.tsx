@@ -53,7 +53,8 @@ export default function BookingFlow({ selectedIds, onClose, onSuccess }: Booking
       onSuccess: async (reference) => {
         const loadingToast = toast.loading('Verifying and saving booking...');
         try {
-          const response = await fetch('http://localhost:5000/api/order', {
+          const API_URL = import.meta.env.DEV ? 'http://localhost:5000/api/order' : '/api/order';
+          const response = await fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
