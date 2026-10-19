@@ -30,6 +30,7 @@ export default function Footer() {
             <div>
               <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-brand-navy mb-6">Directory</h4>
               <nav className="flex flex-col gap-4">
+                <a href="/apply" className="text-sm font-medium text-brand-gold hover:text-brand-navy transition-colors">Free Styling Campaign</a>
                 <a href="#services" className="text-sm font-medium text-brand-brown hover:text-brand-gold transition-colors">Services</a>
                 <a href="#gallery" className="text-sm font-medium text-brand-brown hover:text-brand-gold transition-colors">The Gallery</a>
                 <a href="#about" className="text-sm font-medium text-brand-brown hover:text-brand-gold transition-colors">About Victory</a>
