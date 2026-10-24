@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { cn } from '../lib/utils';
 
 const WHATSAPP_NUMBER = '2348142488625';
+const APPLICATIONS_CLOSED = true;
 const DRAFT_KEY = 'ycs-apply-draft';
 
 const STYLE_ISSUES = [
@@ -175,9 +176,9 @@ export default function ApplyPage() {
           <h1 className="text-4xl md:text-6xl text-brand-navy leading-tight mb-6">
             Your next promotion is already <em className="text-brand-gold">in your wardrobe.</em>
           </h1>
-          <p className="text-lg text-brand-brown/80 mb-8 max-w-xl">
+          {!APPLICATIONS_CLOSED && <p className="text-lg text-brand-brown/80 mb-8 max-w-xl">
             Apply in two minutes. If you're selected, we'll book a free 30–60 minute vetting call to walk you through the process.
-          </p>
+          </p>}
           <ul className="flex flex-wrap gap-3 mb-12 text-xs uppercase tracking-widest font-bold text-brand-navy">
             {['Free', 'Enugu residents only', 'Saturdays · 31 Oct – 12 Dec 2026'].map(t => (
               <li key={t} className="border border-brand-navy/20 px-3 py-2">{t}</li>
@@ -185,7 +186,17 @@ export default function ApplyPage() {
           </ul>
         </motion.div>
 
-        {submitted ? (
+        {APPLICATIONS_CLOSED ? (
+          <div className="bg-brand-navy text-white p-10 text-center">
+            <h2 className="text-3xl mb-4">Applications are now closed.</h2>
+            <p className="text-white/70 mb-8">
+              Thank you for the overwhelming response. All spots for this campaign are full. Follow @ezejivictory to hear about the next one.
+            </p>
+            <a href="/" className="inline-block bg-brand-gold text-brand-navy px-6 py-3 text-xs uppercase tracking-widest font-bold">
+              Back to site
+            </a>
+          </div>
+        ) : submitted ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}

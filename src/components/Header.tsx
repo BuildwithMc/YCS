@@ -25,7 +25,6 @@ export default function Header({ selectedCount, onOpenCheckout }: HeaderProps) {
     { name: 'About', href: '/#about' },
     { name: 'Gallery', href: '/#gallery' },
     { name: 'Contact', href: '/#contact' },
-    { name: 'Apply Free', href: '/apply' },
   ];
 
   return (
